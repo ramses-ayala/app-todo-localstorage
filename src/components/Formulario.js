@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 const Formulario = ({create}) => {
 
-    // CREAR STATE DE CITAS
     const [task, setTask] = useState({
         'title': '',  
         'description': '',
@@ -11,13 +10,9 @@ const Formulario = ({create}) => {
 
     let { title, description } = task;
 
-
-
-    // STATE DE ERROR
     let [error, actualizarError] = useState(false);
 
     
-
     const uuid4 = () => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
             let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -25,17 +20,13 @@ const Formulario = ({create}) => {
         })
     }
 
-    // FUNCION QUE SE EJECUTA CUANDO SE ESTA ESCRIBRIENDO
     const actualizarState = (event) => {
-
         setTask({...task, [event.target.name]: event.target.value});
-
     }
 
     const createTask = (event) => {
         event.preventDefault();
 
-        // VALIDAR CAMPOS DE FORMULARIO
         if(title.trim() === '' || description.trim() === ''){
             actualizarError(true);
             console.log("HAY ERROR");
@@ -47,13 +38,10 @@ const Formulario = ({create}) => {
             // CREAR EL ID
             task.id = uuid4();          
 
-            //console.log(cita);         
-
-            // CREAR LA CITA
+            // CREATE TASK
             create(task);
     
-            // RESETEAR FORMULARIO
-            
+            // RESET FORM
             //event.currentTarget.reset();
             setTask({
                 'title': '',  
